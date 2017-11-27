@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {UserService} from '../../services/users.service';
 import {User} from '../../../User';
 
-
 @Component({
   moduleId: module.id,
   selector: 'users',
@@ -10,7 +9,11 @@ import {User} from '../../../User';
 })
 
 export class UserComponent { 
-    users: User[]; 
+    users: User[];
+    name: string;
+    username: string;
+    password: string;
+
     
     constructor(private userService:UserService){
         this.userService.getUsers()
@@ -18,5 +21,25 @@ export class UserComponent {
                 this.users = users;
             });
     }
+
+addUser(event){
+        event.preventDefault();
+        var newUser = {
+            name: this.name,
+            username : this.username,
+            password : this.password
+        }
+        
+        this.userService.addUser(newUser)
+            .subscribe(user => {
+                this.users.push(user);
+                this.name = '',
+                this.username = '',
+                this.password = '';
+            });
+    }
+    
+
     
 }
+

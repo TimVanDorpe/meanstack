@@ -5,6 +5,13 @@ var router = express.Router();
 var mongojs = require('mongojs');
 var db = mongojs('mongodb://Tim:root@ds053126.mlab.com:53126/meanstack_tim', ['users']);
 
+module.exports = router;
+
+//register a user
+router.post('/register', (req, res) => {
+    res.send('hello world');
+});
+
 
 
 // Get All Users
@@ -28,4 +35,3 @@ router.get('/user/:id', function(req, res, next){
 });
 
 
-module.exports = router;
